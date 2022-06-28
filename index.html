@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+  <head>
+    <title>freeCodeCamp Technical Documentation Page Project: Python 3.10
+    </title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <nav id="navbar">
+      <header>
+        Python 3.10
+      </header>
+      <ul>
+        <li><a class="nav-link" href="#freeCodeCamp_Technical_Documentation_Page_Project:_Python_3.10">freeCodeCamp Technical Documentation Page Project: Python 3.10</a></li>
+      <ul>
+        <li><a class="nav-link" href="#Summary_Release_Highlights">Summary Release Highlights</a></li>
+        <li>
+          <a class="nav-link" href="#New_Features">New Features</a>
+        </li>
+        <li><a class="nav-link" href="#Better_error_messages">Better error messages</a></li>
+        <li>
+          <a class="nav-link" href="#PEP_626_Precise_line_numbers_for_debugging_and_other_tools">PEP 626 Precise line numbers for debugging and other tools</a>
+        </li>
+        <li><a class="nav-link" href="#PEP_634_Structural_Pattern_Matching">PEP 634 Structural Pattern Matching</a></li>
+        <li>
+          <a class="nav-link" href="#New_Features_Related_to_Type_Hints">New Features Related to Type Hints</a>
+        </li>
+      </ul>
+    </nav>
+  </body>
+  <main id="main-doc">
+    <section class="main-section" id="freeCodeCamp_Technical_Documentation_Page_Project:_Python_3.10">
+      <header><h1>freeCodeCamp Technical Documentation Page Project: Python 3.10</h1></header>
+      <p>For the freeCodeCamp Technical Documentation Page project, I am taking excerpts from the <a href="https://docs.python.org/3/whatsnew/3.10.html">What's New in Python 3.10</a> documentation in order to complete this challenge. I have done this partly to read up and familiarise myself with the latest stable Python update!</p>
+      <p>Also, as the <a href="https://technical-documentation-page.freecodecamp.rocks/#Introduction">freeCodeCamp project example</a> focuses on JavaScript, I thought this would be a nice point of differentiation.</p>
+      <p><strong>This documentation is very much truncated and incomplete, including just enough examples to fulfill the freeCodeCamp project requirements.</strong> To view all of the changes and new features of Python 3.10, or other information on the Python programming language, please refer to the <a href="https://www.python.org/doc/">Python Docs website.</a></p>
+    </section>
+
+    <section class="main-section" id="Summary_Release_Highlights">
+      <header><h2>Summary Release Highlights</h2></header>
+      <p>New syntax features:</p>
+        <ul>
+          <li>PEP 634, Structural Pattern Matching: Specification</li>
+          <li>PEP 635, Structural Pattern Matching: Motivation and Rationale</li>
+          <li>PEP 636, Structural Pattern Matching: Tutorial</li>
+          <li>bpo-12782, Parenthesized context managers are now officially allowed.</li>
+        </ul>
+
+      <p>New features in the standard library:</p>
+        <ul>
+          <li>PEP 618, Add Optional Length-Checking To zip.</li>
+        </ul>
+
+       <p>Important deprecations, removals or restrictions:</p>
+        <ul>
+          <li>PEP 644, Require OpenSSL 1.1.1 or newer</li>
+          <li>PEP 632, Deprecate distutils module.</li>
+          <li>PEP 623, Deprecate and prepare for the removal of the wstr member in PyUnicodeObject.</li>          
+        </ul>         
+    </section>
+
+    <section class="main-section" id="New_Features">
+      <header><h2>New Features</h2></header>
+      <h3>Parenthesized context managers</h3>
+      <p>Using enclosing parentheses for continuation across multiple lines in context managers is now supported. This allows formatting a long collection of context managers in multiple lines in a similar way as it was previously possible with import statements. For instance, all these examples are now valid:</p>
+      <!-- Coding segment here -->
+      <code>with (CtxManager() as example):
+              &emsp; ... <br>
+   
+            with (
+                &emsp; CtxManager1(),
+                &emsp; CtxManager2()
+            ): <br>
+
+            with (CtxManager1() as example, 
+                &emsp; CtxManager2()): 
+                &emsp; ... <br>
+
+            with (CtxManager1(), 
+                &emsp; CtxManager2() as example): 
+                &emsp; ... <br>
+
+            with ( 
+                &emsp; CtxManager1() as example1, 
+                &emsp; CtxManager2() as example2 
+            ): 
+                &emsp; ...
+      </code>
+    <!-- End coding segment -->
+      <p>it is also possible to use a trailing comma at the end of the enclosed group:</p>
+      <!-- Coding segment here -->
+      <code>
+        with ( <br>
+            &emsp; CtxManager1() as example1, <br>
+            &emsp; CtxManager2() as example2, <br>
+            &emsp; CtxManager3() as example3, <br>
+        ): <br>
+            &emsp; ...
+      </code>
+    <!-- End coding segment -->      
+      <p>This new syntax uses the non LL(1) capacities of the new parser. Check PEP 617 for more details.</p>
+    </section>
+
+    <section class="main-section" id="Better_error_messages">
+      <header>
+        <h3>Better error messages</h3>
+      </header>
+      <h4>Indendation errors</h4>
+      <p>Many IndentationError exceptions now have more context regarding what kind of block was expecting an indentation, including the location of the statement:</p>
+      <!-- Coding segment here -->
+      <code>
+        expected = {9: 1, 18: 2, 19: 2, 27: 3, 28: 3, 29: 3, 36: 4, 37: 4,<br>
+ &emsp; &emsp; &emsp; &emsp; 38: 4, 39: 4, 45: 5, 46: 5, 47: 5, 48: 5, 49: 5, 54: 6,<br>
+        some_other_code = foo()
+      </code>
+      <!-- End coding segment --> 
+      <p>In a similar way, errors involving unclosed string literals (single and triple quoted) now point to the start of the string instead of reporting EOF/EOL.</p>
+      <p>These improvements are inspired by previous work in the PyPy interpreter.</p>
+    </section>
+
+    <section class="main-section" id="PEP_626_Precise_line_numbers_for_debugging_and_other_tools">
+      <header><h3>PEP 626 Precise line numbers for debugging and other tools</h3></header>
+      <p>PEP 626 brings more precise and reliable line numbers for debugging, profiling and coverage tools. Tracing events, with the correct line number, are generated for all lines of code executed and only for lines of code that are executed.</p>
+    </section>
+
+    <section class="main-section" id="PEP_634_Structural_Pattern_Matching">
+      <header><h3>PEP 634 Structural Pattern Matching</h3></header>
+      <p>Structural pattern matching has been added in the form of a match statement and case statements of patterns with associated actions. Patterns consist of sequences, mappings, primitive data types as well as class instances. Pattern matching enables programs to extract information from complex data types, branch on the structure of data, and apply specific actions based on different forms of data.</p>
+      <h4>Syntax and operations</h4>
+      <p>The generic syntax of pattern matching is:</p>
+      <!-- Coding segment here -->
+      <code>
+        match subject: <br>
+&emsp; &emsp; case &ltpattern_1&gt: <br>
+&emsp; &emsp; &emsp; &emsp; &ltaction_1&gt <br>
+&emsp; &emsp; case &ltpattern_2&gt: <br>
+&emsp; &emsp;&emsp; &emsp; &ltaction_2&gt <br>
+&emsp; &emsp; case &ltpattern_3&gt: <br>
+&emsp; &emsp;&emsp; &emsp; &ltaction_3&gt <br>
+&emsp; &emsp; case _: <br>
+&emsp; &emsp;&emsp; &emsp; &ltaction_wildcard&gt
+      </code>
+      <!-- End coding segment --> 
+      <p>A match statement takes an expression and compares its value to successive patterns given as one or more case blocks.</p>
+    </section>
+
+    <section class="main-section" id="New_Features_Related_to_Type_Hints">
+      <header><h2>New Features Related to Type Hints</h2></header>
+      <h3>PEP 604: New Type Union Operator</h3>
+      <p>A new type union operator was introduced which enables the syntax X | Y. This provides a cleaner way of expressing ‘either type X or type Y’ instead of using typing.Union, especially in type hints.</p>
+      <p>In previous versions of Python, to apply a type hint for functions accepting arguments of multiple types, typing.Union was used:</p> 
+      <!-- Coding segment here -->
+      <code>
+        def square(number: Union[int, float]) -&gt Union[int, float]: <br>
+        &emsp; &emsp; return number ** 2
+      </code>
+      <!-- End coding segment -->
+      <p>Type hints can now be written in a more succinct manner:</p>
+      <!-- Coding segment here -->
+      <code>
+        def square(number: int | float) -&gt int | float: <br>
+        &emsp; &emsp; return number ** 2
+      </code>
+      <!-- End coding segment -->
+      <p>This new syntax is also accepted as the second argument to isinstance() and issubclass():</p>
+      <!-- Coding segment here -->
+      <code>&gt&gt&gt isinstance(1, int | str) <br>
+True</code>
+      <!-- End coding segment -->
+    </section>
+
+  </main>
+</html>
